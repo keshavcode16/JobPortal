@@ -1,0 +1,112 @@
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+from rest_framework import serializers, status
+from rest_framework.exceptions import NotFound
+from rest_framework.generics import RetrieveAPIView, ListAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+#my local imports
+from .exceptions import ProfileDoesNotExist
+from .models import Profile
+from .renderers import ProfileJSONRenderer, FollowersJSONRenderer, FollowingJSONRenderer
+from .serializers import ProfileSerializer
+# from core_apps.web_store.models import ProductModel
+import logging
+logger = logging.getLogger("loggers")
+
+
+
+
+class ProfileRetrieveAPIView(RetrieveAPIView):
+    """
+    This class contains view to retrieve a profile instance.
+    Any user is allowed to retrieve a profile
+    """
+
+    permission_classes = (AllowAny,)
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.select_related('user')
+
+    def retrieve(self, request, username, *args, **kwargs):
+        try:
+            profile = self.queryset.get(user__username=username)
+            serializer = self.serializer_class(profile,)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Profile.DoesNotExist:
+            raise ProfileDoesNotExist(
+                'A profile for user {} does not exist.'.format(username))
+        except Exception as error:
+            return Response({'error':f'Error in retriving profile detail {str(error)}'})
+
+
+
+class UserFollowAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (ProfileJSONRenderer,)
+    serializer_class = ProfileSerializer
+
+    def put(self, request, username=None, actionType=None):
+        follower, followed = None, None
+        
+        try:
+            follower = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            raise NotFound('Profile must exists to follow.')
+
+        try:
+            followed = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            raise NotFound('A profile for user {} does not exist.'.format(username))
+        
+        if follower is not None and actionType == 'follow':
+            logger.info(f'request to follow arrived..')
+            followed.follow(follower)
+        
+        if follower is not None and actionType == 'unfollow':
+            followed.unfollow(follower)
+
+        serializer = self.serializer_class(followed, context={
+            'request': request
+        })
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class FollowingRetrieve(ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (FollowingJSONRenderer,)
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        return self.request.user.profile.follows.all()
+
+
+class FollowersRetrieve(ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (FollowersJSONRenderer,)
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        return self.request.user.profile.follower.all()
+    
+
+class FollowersRetrieveAPIView(ListAPIView):
+    permission_classes = (AllowAny,)
+    renderer_classes = (FollowersJSONRenderer,)
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
+
+    def get_queryset(self):
+        queryset = Profile.objects.none()
+        try:
+            username = self.request.query_params.get("username", None)
+            if username is not None:
+                profile = self.queryset.get(user__username=username)
+                queryset = profile.follows.all()
+            return queryset
+        except Exception as error:
+            logger.error(f'Error in retriving followers {str(error)}')
+            return queryset
+        

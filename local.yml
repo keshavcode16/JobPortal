@@ -1,0 +1,108 @@
+version: "3.9"
+
+services:
+    api:
+        build:
+            context: .
+            dockerfile: ./docker/local/django/Dockerfile
+        command: /start
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/app:z
+            - static_volume:/app/staticfiles
+            - media_volume:/app/mediafiles
+        expose:
+            - "8000"
+        env_file:
+            - ./.envs/.local/.django
+            - ./.envs/.local/.postgres
+        depends_on:
+            - postgres
+            - mailhog
+        networks:
+            - homedecor-app
+
+    postgres:
+        build:
+            context: .
+            dockerfile: ./docker/local/postgres/Dockerfile
+        volumes:
+            - local_postgres_data:/var/lib/postgresql/data2
+        env_file:
+            - ./.envs/.local/.postgres
+        networks:
+            - homedecor-app
+
+    mailhog:
+        image: mailhog/mailhog:v1.0.0
+        container_name: mailhog
+        ports:
+            - "8025:8025"
+        networks:
+            - homedecor-app
+    
+    redis:
+        image: redis:7-alpine
+        networks:
+            - homedecor-app
+
+    celery_worker:
+        build:
+            context: .
+            dockerfile: ./docker/local/django/Dockerfile
+        command: /start-celeryworker
+        volumes:
+            - .:/app
+        env_file:
+            - ./.envs/.local/.django
+            - ./.envs/.local/.postgres
+        depends_on:
+            - redis
+            - postgres
+            - mailhog
+        networks:
+            - homedecor-app
+
+    flower:
+        build:
+            context: .
+            dockerfile: ./docker/local/django/Dockerfile
+        command: /start-flower
+        volumes:
+            - flower_data:/data
+        env_file:
+            - ./.envs/.local/.django
+            - ./.envs/.local/.postgres
+        ports:
+            - "5555:5555"
+        depends_on:
+            - redis
+            - postgres
+        networks:
+            - homedecor-app
+
+    nginx:
+        restart: always
+        depends_on:
+            - api
+        volumes:
+            - static_volume:/app/staticfiles
+            - media_volume:/app/mediafiles
+        build:
+            context: ./docker/local/nginx
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+        networks:
+            - homedecor-app
+
+networks:
+    homedecor-app:
+        driver: bridge
+
+volumes:
+    static_volume:
+    media_volume:
+    local_postgres_data: {}
+    flower_data: {}
