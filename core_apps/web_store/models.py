@@ -27,7 +27,7 @@ def product_image_directory_path(instance, filename):
     s = shortuuid.ShortUUID(alphabet="0123456789")
     rnd = s.random(length=6)
 
-    return f'products/images/{instance.user.id}/{rnd}-{filename}'
+    return f'products/images/{instance.model.model_slug}/{rnd}-{filename}'
 
 
 def receipt_image_directory_path(instance, filename):
@@ -50,20 +50,25 @@ class UnitPrice(models.Model):
         ("MODEL", "MODEL"),
         ("PRODUCT", "PRODUCT"),
     )
-    unit_name = models.CharField(max_length=120, editable=False, verbose_name="Unit Name")
+    unit_name = models.CharField(max_length=120, verbose_name="Unit Name")
     price_type = models.CharField(choices=PRICE_TYPES, null=True, max_length=20)
     currency = models.ForeignKey(Currency, on_delete=models.PROTECT,null=True,blank=True )
-    length = models.IntegerField()
-    width = models.IntegerField()
+    init_length = models.IntegerField()
+    init_width = models.IntegerField()
+    final_length = models.IntegerField()
+    final_width = models.IntegerField()
     area = models.IntegerField()
     price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Price")
+    to_price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="To Price")
+    
 
 
     def __str__(self):
-        return '{}X{} {} Price {}{}-{}'.format(self.length, self.width, self.unit_name, self.currency.cr_prefix, self.price, self.price_type)
+        return '{}X{}{}-{}X{}{}  Price {}{}-{}{} {}'.format(self.init_length, self.init_width, self.unit_name, self.final_length, self.final_width, self.unit_name, self.currency.cr_prefix, self.price, self.currency.cr_prefix, self.to_price, self.price_type)
     
     def __unicode__(self):
-        return '{}X{} {} Price {}{}-{}'.format(self.length, self.width, self.unit_name, self.currency.cr_prefix, self.price, self.price_type)
+        return '{}X{}{}-{}X{}{}  Price {}{}-{}{} {}'.format(self.init_length, self.init_width, self.unit_name, self.final_length, self.final_width, self.unit_name, self.currency.cr_prefix, self.price, self.currency.cr_prefix, self.to_price, self.price_type)
+
 
 
 class BaseProductModel(models.Model):
@@ -86,14 +91,14 @@ class ProductModel(models.Model):
     """
     Bunch of product belongs to a specific Product Model
     """
-    base_model = models.ForeignKey(BaseProductModel, on_delete=models.CASCADE, related_name="%(app_label)s_%(class)s_related")
+    base_model = models.ForeignKey(BaseProductModel, on_delete=models.PROTECT, related_name="%(app_label)s_%(class)s_related")
     name = models.CharField(max_length=120, verbose_name="Model Name")
     model_slug = models.SlugField() 
     color = models.CharField(max_length=30)
     color_code = models.CharField(max_length=20, null=True, blank=True, verbose_name="Color Code")
     description = models.TextField()
     model_image = models.ImageField(null=True, blank=True, upload_to=product_model_image_directory_path, verbose_name="Model Image")
-    unit_price = models.ForeignKey(UnitPrice, on_delete=models.CASCADE, related_name="%(app_label)s_%(class)s_related")
+    unit_price = models.ForeignKey(UnitPrice, on_delete=models.PROTECT, related_name="%(app_label)s_%(class)s_related")
     is_draft = models.BooleanField(default=True, )
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -118,7 +123,7 @@ class Product(models.Model):
     """
     Ongoing Post thread before publishing post
     """
-    name = models.CharField(max_length=120, editable=False, verbose_name="Model Name")
+    name = models.CharField(max_length=120, verbose_name="Model Name")
     product_slug = models.SlugField() 
     description = models.TextField()
     model = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name="%(app_label)s_%(class)s_related")

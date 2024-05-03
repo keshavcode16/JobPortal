@@ -1,0 +1,623 @@
+{% extends 'base.html'%}
+{% load custom_tags %}
+{% load static %}
+{% block content %}
+<main b-jf0n7db0j2>
+    <div b-jf0n7db0j2 class="wrap-content">
+        <div class="wrap-content">
+            <div class="product-breadcrumb">
+                <div class="container-lg">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="d-flex px-3 py-2 mb-0">
+                                <li><a href="/"
+                                        class="color-black fs-13 fw-4 text-uppercase">Home</a> / </li>
+                                <li><a href="/"
+                                        class="color-black fs-13 fw-4 text-uppercase">Rugs</a> / </li>
+                                <li><span
+                                        class="color-black fs-13 fw-4 text-uppercase"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-detail-section">
+                <div class="container-lg">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-12" id="div_ProductImages">
+                            <div class="product-detail-img-slider tab-content" id="myTabContent">
+                                <div class="product-detail-thumbnail-img tab-pane fade show active"
+                                    id="prdouct-slider1-tab-pane" role="tabpanel" aria-labelledby="prdouct-slider1-tab"
+                                    tabindex="0">
+                                    <a href="https://www.resharugs.com/prod-images/Image1/x-large/IMG_3545.jpg"
+                                        data-fancybox="productGallery">
+                                        <div class="zoom" onmousemove="zoom(event)"
+                                            style="background-image: url(https://www.resharugs.com/prod-images/Image1/x-large/IMG_3545.jpg)">
+                                            <img src="https://www.resharugs.com/prod-images/Image1/large/IMG_3545.jpg"
+                                                alt="Product1">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <ul class="nav nav-tabs product-detail-tab" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="prdouct-slider1-tab" data-bs-toggle="tab"
+                                        data-bs-target="#prdouct-slider1-tab-pane" type="button" role="tab"
+                                        aria-controls="home-tab-pane" aria-selected="true">
+                                        <img src="https://www.resharugs.com/prod-images/Image1/small/IMG_3545.jpg"
+                                            alt="">
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                            <script
+                                src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+                            <script>
+
+                                const init = {
+                                    slidesToShow: 1,
+                                    infinite: true,
+                                    slidesToScroll: 1,
+                                    autoplay: false,
+                                    autoplaySpeed: 1500,
+                                    arrows: false,
+                                    loop: true,
+                                    dots: false,
+                                    responsive: [
+                                        {
+                                            breakpoint: 767,
+                                            settings: {
+                                                dots: true
+                                            },
+                                        }
+                                    ]
+                                };
+                                $(() => {
+                                    const win = $(window);
+                                    const slider = $(".product-detail-img-slider");
+                                    if (win.width() < 767) {
+                                        slider.not(".slick-initialized").slick(init);
+                                    } else if (slider.hasClass("slick-initialized")) {
+                                        slider.slick("unslick");
+                                    }
+                                });
+                            </script>
+                            <script
+                                src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+                            <script>
+                                $('[data-fancybox="productGallery"]').fancybox({
+                                    buttons: [
+                                        "slideShow",
+                                        "thumbs",
+                                        "zoom",
+                                        "fullScreen",
+                                        "share",
+                                        "close"
+                                    ],
+                                    loop: false,
+                                    protect: true
+                                });
+
+                            </script>
+                        </div>
+                        <div class="col-lg-7 col-md-12">
+                            <div class="product-detail-content">
+                                <div class="alert alert-danger alert-dismissible fade show mb-3 d-none" role="alert"
+                                    id="div_errorMessage">
+                                    <p id="P_errortext">Product is not added</p>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="d-flex product-heading-line">
+                                    <h1 class="fs-30 fw-3 text-capitalize color-black">{{prdouct}}</h1>
+                                    <div class="product-share-icon ">
+                                        <a href="#" class="d-flex">
+                                            <span class="fs-16 color-black">Share : </span>
+                                            <img src="https://d3o59fu9acgbkr.cloudfront.net/jrc2021/assets/v2/master/img/svg/share-icon.svg"
+                                                alt="share-icon">
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <span class="fs-15 fw-3 color-black d-block mb-1">COLOR : MANGO/SOFT CORAL</span>
+                                <div class="product-color-rugs color-black d-block mb-2">
+                                    <ul class="d-flex">
+                                        <li class="product-active">
+                                            <a
+                                                href="https://www.resharugs.com/rugs/rrtwl-48-dark-gray-light-gray-tufted-rugs"><img
+                                                    src="https://www.resharugs.com/prod-images/image1/large/IMG_3545.jpg"
+                                                    alt="color-rug1"></a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+
+                                <div id="productCustomSize">
+                                    <div class="productCustomDiv">
+                                        <div class="productCustomSize">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <select>
+                                                        <option>ft</option>
+                                                        <option>cm</option>
+                                                        <option>mm</option>
+                                                        <option>meter</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <select>
+                                                        <option>Rectangle</option>
+                                                        <option>Round</option>
+                                                        <option>Runner</option>
+                                                        <option>Square</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="productCustomShape">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <label class="d-block">Width</label>
+                                                    <input type="text" value="" placeholder="">
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <label class="d-block">Height</label>
+                                                    <input type="text" value="" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="row d-none">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <label class="d-block">Width</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <input type="text" value="" placeholder="ft*">
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <input type="text" value="" placeholder="inch*">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <label class="d-block">Height</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <input type="text" value="" placeholder="ft*">
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <input type="text" value="" placeholder="inch*">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="div_ProductAction">
+                                    <div class="product-size-detail mb-0">
+                                        <ul class="mb-0">
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000541')">
+                                                    2X3 ft
+                                                    <br>
+                                                    60x90 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000542')">
+                                                    3X5 ft
+                                                    <br>
+                                                    90x150 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000543')">
+                                                    4X6 ft
+                                                    <br>
+                                                    120x180 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000544')">
+                                                    5X8 ft
+                                                    <br>
+                                                    150x240 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000545')">
+                                                    6X9 ft
+                                                    <br>
+                                                    180x270 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000546')">
+                                                    8X10 ft
+                                                    <br>
+                                                    240x300 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000547')">
+                                                    9X12 ft
+                                                    <br>
+                                                    270x360 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000548')">
+                                                    10X14 ft
+                                                    <br>
+                                                    300x420 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAction('rrtwl-48-dark-gray-light-gray-tufted-rugs','RUG0000549')">
+                                                    12X15 ft
+                                                    <br>
+                                                    360x450 cm
+                                                </a>
+                                                <span class="size-deliver-time">60 days</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="amount-quantity-contact d-flex">
+                                        <div class="product-amount-quantity d-flex">
+                                            <div class="product-amount mt-3">
+                                                <span>&#x20B9;3,600 - &#x20B9;108,000</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-contact-us">
+                                            <ul class="d-flex mb-0">
+                                                <li class="fs-18 fw-4">Contact Us :</li>
+                                                <li class="mx-1"><a href="tel:18884641447"><img
+                                                            src="https://www.resharugs.com/assets/images/product-contact-icon1.svg"
+                                                            alt="Contact-icon1"></a></li>
+                                                <li class="mx-1"><a href="tel:18884641447"><img
+                                                            src="https://www.resharugs.com/assets/images/product-contact-icon2.svg"
+                                                            alt="Contact-icon2"></a></li>
+                                                <li class="mx-1"><a href="tel:18884641447"><img
+                                                            src="https://www.resharugs.com/assets/images/product-contact-icon3.svg"
+                                                            alt="Contact-icon3"></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-action-btn d-flex">
+                                        <a href="javascript:void(0)" onclick="ProductNotApplyAction()">Add to
+                                            cart</a>
+                                        <a href="javascript:void(0)"
+                                            onclick="ProductAddtoWishlistAction('RRTWL-48-0001')"> Add to
+                                            wishlist</a>
+                                    </div>
+
+
+                                    <script>
+                                        function ProductAddtoCartAction(CurrencyCode, ImageName, Barcode) {
+                                            document.getElementById('loadingDIV').style.display = 'block';
+                                            var ProductQuantity = $('#ddlProductQuantity').val();
+                                            console.log(ProductQuantity);
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: 'https://www.resharugs.com/Checkout/ProductAddToCart',
+                                                data: { CurrencyCode: CurrencyCode, ImageName: ImageName, Barcode: Barcode, Quantity: ProductQuantity },
+                                                datatype: 'json',
+                                                success: function (data) {
+                                                    document.getElementById('loadingDIV').style.display = 'none';
+                                                    if (data.match('error')) {
+                                                        $('#P_errortext').text(data.replace("error", ""));
+                                                        $('#div_errorMessage').removeClass("d-none");
+                                                        $('#div_errorMessage').addClass("d-block");
+                                                        console.log(data);
+                                                    }
+                                                    else {
+                                                        $("#div_CartMasterPopup").empty();
+                                                        $("#div_CartMasterPopup").html(data);
+                                                        var offcanvasElement = document.getElementById("div_CartPopup");
+                                                        var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                                                        offcanvas.toggle();
+                                                    }
+
+                                                },
+                                                error: function (data) {
+                                                    var r = jQuery.parseJSON(data.responseText);
+                                                    alert("Message: " + r.Message);
+                                                    alert("StackTrace: " + r.StackTrace);
+                                                    alert("ExceptionType: " + r.ExceptionType);
+                                                }
+                                            });
+                                        }
+
+
+                                        function ProductNotApplyAction() {
+                                            $('#P_errortext').text("Please select the size.");
+                                            $('#div_errorMessage').removeClass("d-none");
+                                            $('#div_errorMessage').addClass("d-block");
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="product-detail-information pb-0">
+                                <nav>
+                                    <div class="nav nav-tabs" id="myTab" role="tablist">
+                                        <a class="nav-item nav-link active" id="product-details-tab"
+                                            data-bs-toggle="tab" data-bs-target="#product-details-tab-pane"
+                                            type="button" role="tab" aria-controls="product-details-tab-pane"
+                                            aria-selected="true">Overview</a>
+                                        <a class="nav-item nav-link" id="care-tab" data-bs-toggle="tab"
+                                            data-bs-target="#care-tab-pane" type="button" role="tab"
+                                            aria-controls="care-tab-pane" aria-selected="false">Specifications</a>
+                                        <a class="nav-item nav-link" id="description-tab" data-bs-toggle="tab"
+                                            data-bs-target="#description-tab-pane" type="button" role="tab"
+                                            aria-controls="description-tab-pane" aria-selected="false">Description</a>
+                                        <a class="nav-item nav-link" id="shipping-tab" data-bs-toggle="tab"
+                                            data-bs-target="#shipping-tab-pane" type="button" role="tab"
+                                            aria-controls="shipping-tab-pane" aria-selected="false">Shipping
+                                            Info</a>
+                                        <!--<a class="nav-item nav-link" id="enquiry-tab" data-bs-toggle="tab" data-bs-target="#enquiry-tab-pane" type="button" role="tab" aria-controls="enquiry-tab-pane" aria-selected="false">Enquiry Form</a>-->
+                                    </div>
+                                </nav>
+                                <div class="tab-content py-3 pb-0" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="product-details-tab-pane" role="tabpanel"
+                                        aria-labelledby="product-details-tab" tabindex="0">
+                                        <div class="tap-mob-heading position-relative"><a
+                                                href="#product-details-tab-pane"
+                                                class="mob-tabpane-toggler">Overview</a>
+                                            <div class="product-info-arrow-icon">
+                                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'
+                                                    fill='#212529'>
+                                                    <path fill-rule='evenodd'
+                                                        d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tabpane-inner-content">
+                                            <div class="product-detail-overview">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <a href="javascript:void(0)">
+                                                            <div class="d-flex">
+                                                                <div class="product-detail-overview-img">
+                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon1.svg"
+                                                                        alt="product-overview-icon1">
+                                                                </div>
+                                                                Low: 3/8''- 1/2''
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <a href="javascript:void(0)">
+                                                            <div class="d-flex">
+                                                                <div class="product-detail-overview-img">
+                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon2.svg"
+                                                                        alt="product-overview-icon2">
+                                                                </div>
+                                                                Pet-Friendly
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <a href="javascript:void(0)">
+                                                            <div class="d-flex">
+                                                                <div class="product-detail-overview-img">
+                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon3.svg"
+                                                                        alt="product-overview-icon3">
+                                                                </div>
+                                                                Kid-Friendly
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <a href="javascript:void(0)">
+                                                            <div class="d-flex">
+                                                                <div class="product-detail-overview-img">
+                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon4.svg"
+                                                                        alt="product-overview-icon4">
+                                                                </div>
+                                                                High Traffic
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <a href="javascript:void(0)">
+                                                            <div class="d-flex">
+                                                                <div class="product-detail-overview-img">
+                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon5.svg"
+                                                                        alt="product-overview-icon1">
+                                                                </div>
+                                                                Durable
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <a href="javascript:void(0)">
+                                                            <div class="d-flex">
+                                                                <div class="product-detail-overview-img">
+                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon1.svg"
+                                                                        alt="product-overview-icon1">
+                                                                </div>
+                                                                Low: 3/8''- 1/2''
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="care-tab-pane" role="tabpanel"
+                                        aria-labelledby="care-tab" tabindex="0">
+                                        <div class="tap-mob-heading position-relative"><a href="#care-tab-pane"
+                                                class="mob-tabpane-toggler">Specifications</a>
+                                            <div class="product-info-arrow-icon">
+                                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'
+                                                    fill='#212529'>
+                                                    <path fill-rule='evenodd'
+                                                        d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' />
+                                                </svg>
+                                            </div>
+
+                                        </div>
+                                        <div class="tabpane-inner-content">
+                                            <table width="100%" class="text-capitalize">
+                                                <tr>
+                                                    <td>Design ID</td>
+                                                    <td>RRTWL-48</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Color Family</td>
+                                                    <td>Dark Gray</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>GR Color</td>
+                                                    <td>Dark Gray</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>BR Color</td>
+                                                    <td>Light Gray</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Quality</td>
+                                                    <td>Tufted</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Material</td>
+                                                    <td>100% Wool</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Construction</td>
+                                                    <td>Tufted</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Thickness</td>
+                                                    <td>22-25 MM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Location</td>
+                                                    <td>indoor use only</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Designer</td>
+                                                    <td>Aftab</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Made In</td>
+                                                    <td>India</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Custom Sizes</td>
+                                                    <td>Available</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="description-tab-pane" role="tabpanel"
+                                        aria-labelledby="description-tab" tabindex="0">
+                                        <div class="tap-mob-heading position-relative"><a href="#description-tab-pane"
+                                                class="mob-tabpane-toggler">Description</a>
+                                            <div class="product-info-arrow-icon">
+                                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'
+                                                    fill='#212529'>
+                                                    <path fill-rule='evenodd'
+                                                        d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tabpane-inner-content">
+                                            <div class="product-info  color-black d-block mb-2">
+                                                <ul>
+                                                    <li class="fs-14 fw-3 text-capitalize">
+                                                        <span class="d-block fs-15 fw-6">PRICE</span>
+                                                        &#x20B9;600/sqft
+                                                    </li>
+                                                    <li class="fs-14 fw-3 text-capitalize">
+                                                        <span class="d-block fs-15 fw-6">MATERIAL</span>
+                                                        Wool
+                                                    </li>
+                                                    <li class="fs-14 fw-3 text-capitalize">
+                                                        <span class="d-block fs-15 fw-6">WEAVING </span>
+                                                        Tufted
+                                                    </li>
+                                                    <li class="fs-14 fw-3 text-capitalize">
+                                                        <span class="d-block fs-15 fw-6">PATTERN</span>
+                                                        Geometrical
+                                                    </li>
+                                                    <li class="fs-14 fw-3 text-capitalize">
+                                                        <span class="d-block fs-15 fw-6">STYLE</span>
+                                                        modern
+                                                    </li>
+                                                    <li class="fs-14 fw-3 text-capitalize">
+                                                        <span class="d-block fs-15 fw-6">DECORE STYLE</span>
+
+                                                    </li>
+                                                    <li class="fs-14 fw-3 text-capitalize">
+                                                        <span class="d-block fs-15 fw-6">WARRANTY</span>
+                                                        6 Months warranty
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="tabpane-inner-content">
+                                                Step onto a canvas of precision, where bold designs intertwine with
+                                                plush comfort. Redefine your living space with this symphony of
+                                                shapes, a testament to contemporary elegance.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="shipping-tab-pane" role="tabpanel"
+                                        aria-labelledby="shipping-tab" tabindex="0">
+                                        <div class="tap-mob-heading position-relative"><a href="#shipping-tab-pane"
+                                                class="mob-tabpane-toggler">Shipping Info
+                                            </a>
+                                            <div class="product-info-arrow-icon">
+                                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'
+                                                    fill='#212529'>
+                                                    <path fill-rule='evenodd'
+                                                        d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tabpane-inner-content">
+                                            shedding is a natural property of new rug.|do not brush or scrub the
+                                            rug.|only vacuum clean it periodically. avoid using vacuum beater brush
+                                            mode.|if spills occur, blot immediately. do not rub the stain.|rotate
+                                            occasionally to equalize wear.|use protectors under the legs of heavy
+                                            furniture to avoid flattening and piling.|if thread comes out do not
+                                            pull the yarn, trim with scissor.|periodic professional cleaning
+                                            recommended.|do not fold the rug.|avoid using the rug in damp or wet
+                                            surface.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="related-products" id="div_RelatedProduct">
+
+            </div>
+            <div class="related-products" id="div_RecentlyProduct">
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

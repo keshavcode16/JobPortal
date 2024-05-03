@@ -26,8 +26,8 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(UnitPrice)
 class UnitPriceModelAdmin(ImportExportActionModelAdmin):
-    list_display = ("unit_name", "length", "width", "currency", "price", "price_type")
-    search_fields =("length", "width",)
+    list_display = ("unit_name", "init_length", "init_width", "final_length", "final_width", "currency", "price", "to_price", "price_type")
+    search_fields =("init_length", "init_width", "final_length", "final_width")
     list_filter = ["unit_name", "price_type"]
 
 
@@ -57,5 +57,6 @@ class ProductAdmin(admin.ModelAdmin):
     autocomplete_fields = ['tags',]
     list_filter = [ ('created_at', DateTimeRangeFilter),
                    ('updated_at', DateTimeRangeFilter), 'model' ]
+    readonly_fields = ('product_slug', )
 
     

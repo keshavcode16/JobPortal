@@ -1,0 +1,269 @@
+{% extends 'base.html'%}
+{% load custom_tags %}
+{% load static %}
+{% block content %}
+<main b-jf0n7db0j2>
+    <div b-jf0n7db0j2 class="wrap-content">
+        <div class="product-banner-bg third-bg py-4">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product-banner-heading text-center">
+                            <h1 class="text-capitalize fw-3 mb-0">{{model_slug}}-rugs</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-breadcrumb">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="d-flex px-3 py-2 mb-0">
+                            <li><a href="/"
+                                    class="color-black fs-13 fw-4 text-uppercase">Home</a> / </li>
+                            <li><span class="color-black fs-13 fw-4 text-uppercase">{{model_slug}}-rugs</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% include "includes/product_filter.html" %}
+
+            <div class="col-lg-9">
+                {% include "includes/product_sorting.html" %}
+
+                <div id="divProductList">
+
+
+                    <input type="hidden"
+                        value="div_des_size-10x14~43#div_des_size-12x15~43#div_des_size-2x3~44#div_des_size-3x5~44#div_des_size-4x6~44#div_des_size-5x8~43#div_des_size-6x9~43#div_des_size-8x10~43#div_des_size-9x12~43#div_des_shape-rectangle~44#div_des_color-black~11#div_des_color-blue~4#div_des_color-brown~1#div_des_color-dark_gray~7#div_des_color-gray~5#div_des_color-light_blue~2#div_des_color-light_gray~12#div_des_color-white~1#div_des_color-yellow~1#div_des_style-modern~44#div_des_pattern-decade~7#div_des_pattern-floweral~2#div_des_pattern-geometrical~34#div_des_pattern-transational~1#div_des_material-silk~4#div_des_material-wool~35#div_des_material-wool_and_silk~5#div_des_construction-tufted~44#div_des_collection-decade~7#div_des_collection-enchanted_petals~2#div_des_collection-geometric_harmony~31#div_des_collection-geometrical~3#div_des_collection-transcendent_fusion~1#"
+                        id="ProductDesktopFilterActiveId" />
+                    <input type="hidden"
+                        value="div_mf_mob_size-10x14~43#div_mf_mob_size-12x15~43#div_mf_mob_size-2x3~44#div_mf_mob_size-3x5~44#div_mf_mob_size-4x6~44#div_mf_mob_size-5x8~43#div_mf_mob_size-6x9~43#div_mf_mob_size-8x10~43#div_mf_mob_size-9x12~43#div_mf_mob_shape-rectangle~44#div_mf_mob_color-black~11#div_mf_mob_color-blue~4#div_mf_mob_color-brown~1#div_mf_mob_color-dark_gray~7#div_mf_mob_color-gray~5#div_mf_mob_color-light_blue~2#div_mf_mob_color-light_gray~12#div_mf_mob_color-white~1#div_mf_mob_color-yellow~1#div_mf_mob_style-modern~44#div_mf_mob_pattern-decade~7#div_mf_mob_pattern-floweral~2#div_mf_mob_pattern-geometrical~34#div_mf_mob_pattern-transational~1#div_mf_mob_material-silk~4#div_mf_mob_material-wool~35#div_mf_mob_material-wool_and_silk~5#div_mf_mob_construction-tufted~44#div_mf_mob_collection-decade~7#div_mf_mob_collection-enchanted_petals~2#div_mf_mob_collection-geometric_harmony~31#div_mf_mob_collection-geometrical~3#div_mf_mob_collection-transcendent_fusion~1#"
+                        id="ProductMobileFilterActiveId" />
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script>
+                        AllFillterSetting();
+
+                        function AllFillterSetting() {
+
+                            var FinalFilterActiveId = "";
+                            FinalFilterActiveId = document.getElementById("ProductDesktopFilterActiveId").value;
+                            if (FinalFilterActiveId != "") {
+                                var FilterActive = FinalFilterActiveId.toLowerCase().split('#');
+
+                                var TotalFilter = $('.desktop-filter');
+                                if (TotalFilter.length > 0) {
+                                    for (var i = 1; i <= TotalFilter.length; i++) {
+                                        var ActiveFilterCount = 0;
+                                        if (document.getElementById(i + '-HeadingValue') != null) {
+                                            var FilterName = document.getElementById(i + '-HeadingValue').value.toLowerCase();
+                                            var FilterValue = document.getElementById(i + '-list_extand').getElementsByTagName('input');
+
+                                            if (FilterValue.length > 0) {
+                                                for (var k = 0; k < FilterValue.length; k++) {
+                                                    var Id = 'div_' + FilterValue[k].id;
+
+                                                    if (FinalFilterActiveId.toLowerCase().match(Id.toLowerCase() + "~")) {
+
+                                                        for (var m = 0; m < FilterActive.length; m++) {
+
+                                                            if (FilterActive[m].split('~')[0].toLowerCase() == Id.toLowerCase()) {
+
+                                                                if (document.getElementById("cou_" + FilterValue[k].id)) {
+
+                                                                    document.getElementById("cou_" + FilterValue[k].id).innerHTML = "(" + FilterActive[m].split('~')[1] + ")";
+                                                                }
+                                                            }
+                                                        }
+
+
+                                                        $("#" + FilterValue[k].id).addClass("FilterActivate");
+
+                                                        var hdnFilterSelectValue = $('#hdnFilterSelectId').val();
+                                                        if (hdnFilterSelectValue == null) {
+                                                            hdnFilterSelectValue = "";
+                                                        }
+
+                                                        if (hdnFilterSelectValue.match(i + "-list_extand")) {
+
+                                                        }
+                                                        else {
+                                                            if (ActiveFilterCount < 5) {
+                                                                $("#" + Id).show();
+                                                                $("#DesktopMasterFlterId-" + i).addClass("filter-options_extand");
+                                                            }
+                                                            else {
+                                                                $("#" + Id).hide();
+                                                                $("#DesktopMasterFlterId-" + i).removeClass("filter-options_extand");
+                                                            }
+                                                        }
+                                                        ActiveFilterCount++;
+
+
+                                                    }
+                                                    else {
+
+                                                        $("#" + Id).hide();
+
+                                                        $("#" + FilterValue[k].id).removeClass("FilterActivate");
+                                                        document.getElementById(FilterValue[k].id).checked = false;
+
+                                                        if (document.getElementById("cou_" + FilterValue[k].id)) {
+                                                            document.getElementById("cou_" + FilterValue[k].id).innerHTML = "(0)";
+
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                            else {
+                                                $("#load-more-filter-" + i).css("display", "none");
+                                            }
+
+                                            var TotalActiveLi = $('#' + i + '-list_extand').find("li:visible").length;
+                                            console.log(TotalActiveLi);
+                                            if (TotalActiveLi > 0) {
+                                                $("#DesktopMasterFlterId-" + i).css("display", "block");
+                                            }
+                                            else {
+                                                $("#DesktopMasterFlterId-" + i).css("display", "none");
+                                                $("#load-more-filter-" + i).css("display", "none");
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                            }
+
+
+
+                            var FinalFilterActiveId = "";
+                            FinalFilterActiveId = document.getElementById("ProductMobileFilterActiveId").value;
+                            if (FinalFilterActiveId != "") {
+                                var FilterActive = FinalFilterActiveId.toLowerCase().split('#');
+
+                                var TotalFilter = $('.mobile-filter');
+                                if (TotalFilter.length > 0) {
+                                    for (var i = 1; i <= TotalFilter.length; i++) {
+                                        if (document.getElementById(i + '-MHeadingValue') != null) {
+                                            var FilterName = document.getElementById(i + '-MHeadingValue').value.toLowerCase();
+                                            var FilterValue = document.getElementById('MF-NAV-' + i).getElementsByTagName('input');
+                                            if (FilterValue.length > 0) {
+                                                for (var k = 0; k < FilterValue.length; k++) {
+                                                    var Id = 'div_mf_' + FilterValue[k].id;
+                                                    if (FinalFilterActiveId.toLowerCase().match(Id.toLowerCase() + "~")) {
+                                                        $("#" + Id).show();
+                                                        for (var m = 0; m < FilterActive.length; m++) {
+
+                                                            if (FilterActive[m].split('~')[0].toLowerCase() == Id.toLowerCase()) {
+
+                                                                if (document.getElementById("cou_" + FilterValue[k].id)) {
+
+                                                                    document.getElementById("cou_" + FilterValue[k].id).innerHTML = "(" + FilterActive[m].split('~')[1] + ")";
+                                                                }
+                                                            }
+                                                        }
+
+                                                    }
+                                                    else {
+                                                        $("#" + Id).hide();
+
+                                                        document.getElementById(FilterValue[k].id).checked = false;
+
+                                                        if (document.getElementById("div_mf_" + FilterValue[k].id)) {
+                                                            document.getElementById("div_mf_" + FilterValue[k].id).style.display = "none";
+                                                        }
+
+                                                    }
+
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+
+
+                            }
+                        }
+                    </script>
+
+                    <div class="product-listing-section" id="divProductMasterList">
+                        <div class="container-lg px-4">
+                            <div class="row product-listing-section2">
+                                {% for product in products %} 
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
+                                        <div class="product-listing-details position-relative">
+                                            <div class="percent-discount-listing d-flex">
+                                            </div>
+                                            <div class="product-listing-img position-relative overflow-hidden">
+                                                <a href="javascript:void(0)"
+                                                    onclick="ProductAddtoWishlistAction('RRTWL-01-0001')"
+                                                    class="position-absolute wishlist-section">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                                                        fill="#fff" viewBox="0 0 512 512"
+                                                        id="sv_DeActiveWishlist_RRTWL-01-0001" class="wishlist-icon">
+                                                        <path
+                                                            d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                                                        fill="#d3522b" viewBox="0 0 512 512"
+                                                        id="sv_ActiveWishlist_RRTWL-01-0001"
+                                                        class="wishlist-icon-fill d-none">
+                                                        <path
+                                                            d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                                <a
+                                                    href="{% url 'web_store:product_view_with_model' product_slug=product.product_slug %}">
+                                                    <img src="/mediafiles/products/images/{{product.model.model_slug}}/{{product.product_image|filename}}" alt="Product1">
+                                                </a>
+                                            </div>
+                                            <div class="product-listing-content mt-3 text-center">
+                                                <h5 class="mb-0"><a
+                                                        href="{% url 'web_store:product_view_with_model' product_slug=product.product_slug %}"
+                                                        class="color-black  fs-16 fw-4 text-uppercase">{{product.name}}</a>
+                                                </h5>
+                                                <p class="mb-0 color-black  fs-14 fw-3">{{product.unit_price.init_length}}X{{product.unit_price.init_width}} {{product.unit_price.unit_name}} - {{product.unit_price.final_length}}X{{product.unit_price.final_width}} {{product.unit_price.unit_name}}</p>
+
+                                                <span class="color-black  fs-14 fw-6 text-capitalize d-block">{{product.unit_price.currency.cr_prefix}}{{product.unit_price.price}} - {{product.unit_price.currency.cr_prefix}}{{product.unit_price.to_price}}
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="load-more py-4 pt-0 text-center">
+                                        <a href="javascript:void(0)" onclick="FindPagingData()"
+                                            class="color-black text-uppercase fs-16 fw-4"><svg
+                                                xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                                <path
+                                                    d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V448c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H176c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
+                                            </svg>Load More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <input type="hidden" id="hdnFilterSelectId" value="" />
+        <input type="hidden" id="hdnPageNumber" value="1" />
+        <input type="hidden" id="hdnPageSize" value="32" />
+        <input type="hidden" id="hdnPageOrderNo" value="10" />
+
+
+    </div>
+</main>
+{% endblock %}

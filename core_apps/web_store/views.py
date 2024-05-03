@@ -33,10 +33,29 @@ def web_store_home_view(request):
     available_product_model = defaultdict(list)
     product_models = ProductModel.objects.filter(is_draft=False)
     context = {'product_models':product_models}
-    print(context,"======context=======")
     return render(request, "home.html", context)
 
 
+
+def product_list_view_with_model(request, model_slug):
+    context = {}
+    product_models = ProductModel.objects.filter(model_slug=model_slug, is_draft=False)
+    if product_models.exists():
+        product_model_obj = product_models.first()
+        context['model_slug'] = product_model_obj.name
+        product_qs = Product.objects.filter(model=product_model_obj)
+        if product_qs.exists():
+            context['products'] = product_qs
+    return render(request, "product_list.html", context)
+
+
+def product_view_with_model(request, product_slug):
+    context = {}
+    product_qs = Product.objects.filter(product_slug=product_slug)
+    if product_qs.exists():
+        product_obj = product_qs.first()
+        context['product'] = product_obj
+    return render(request, "product.html", context)
 
 
 class LargeResultsSetPagination(PageNumberPagination):

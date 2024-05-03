@@ -17,7 +17,9 @@ from .views import (
     TagListAPIView, 
     BookmarkAPIView, 
     ProductModelResourcesViewSet,
-    web_store_home_view
+    web_store_home_view,
+    product_list_view_with_model,
+    product_view_with_model
 )
 
 app_name = "web_store"
@@ -36,4 +38,6 @@ router.register(r'products', ProductViewSet,  basename='products')
 urlpatterns = [
     path('api/', include(router.urls)),
     path('', web_store_home_view),
+    path('<str:model_slug>', product_list_view_with_model, name='product_list_view_with_model'),
+    path('product/<str:product_slug>', product_view_with_model, name='product_view_with_model'),
 ]

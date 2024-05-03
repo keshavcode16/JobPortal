@@ -1,0 +1,353 @@
+<div class="product-listing-filter-section">
+                    <div class="container-lg">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="product-listing-filter-details d-flex px-3">
+                                    <div class="product-filter-right order-lg-1 order-md-1 order-sm-0 order-0">
+                                        <div class="d-flex">
+                                            <span class="color-black fs-14 fw-3 text-capitalize">Sort By:</span>
+                                            <select onchange="FindOrderByData(this.value)">
+                                                <option>Sort By</option>
+                                                    <option value="80">Newest</option>
+                                                    <option value="20"> Size : Low to High</option>
+                                                    <option value="30"> Size : High to Low</option>
+                                                    <option value="40">Price : Low to High</option>
+                                                    <option value="50">Price : High to Low</option>
+                                                    <option value="60"> Discount : Low to High</option>
+                                                    <option value="70"> Discount : High to Low</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="product-filter-left order-lg-0 order-md-0 order-sm-1 order-1 ">
+                                        <a href="javascript:void(0)" onclick="ActivateMobileFilter()" role="button" class="color-black d-lg-none d-md-block d-sm-block d-block">
+                                            <svg class="lumia-icon" width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M19 1H1L8.2 9.40889V15.2222L11.8 17V9.40889L19 1Z" class="path--nofill" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg> Open Filter
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="product-filter-list px-3 pb-4 mb-4" id="div_SelectedFilterData">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile_filters d-none" id="m_filer">
+                    
+                    <div class="position-fixed top-0 start-0 end-0 bg-white vh-100">
+                        <div class="heading w-100 position-relative third-bg">
+                            <p class="fs-7 fw-bold text-center p-3 text-uppercase mb-0">Filters</p>
+                            <a href="javascript:void(0)" onclick="DeActivateMobileFilter()"><img src="https://d3o59fu9acgbkr.cloudfront.net/jrc2021/assets/v2/master/img/svg/cross-m-menu.svg" class="position-absolute top-0 bottom-0 m-auto end-0 me-3 "></a>
+                        </div>
+                        <div class="list_of_filer d-flex align-items-start">
+                            <div class="left w-50 position-relative ">
+                                <div class="position-absolute third-bg top-0 w-100 start-0 vh-100 " style="z-index: -1"></div>
+                                <div>
+                                    <div class="nav flex-column nav-pills px-3 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                    <a href="javascript:void(0)" class="mb-4 text-uppercase  mobile-filter color-black fs-15 fw-4 active" id="v-pills-1" data-bs-toggle="pill" data-bs-target="#MF-NAV-1" role="tab" aria-controls="MF-NAV-1" aria-selected="false">
+                                                        Size <span id="span-MF-NAV-1" class="rounded-circle"></span>
+                                                        <input type="hidden" id="1-MHeadingValue" value="size">
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="mb-4 text-uppercase  mobile-filter color-black fs-15 fw-4 " id="v-pills-2" data-bs-toggle="pill" data-bs-target="#MF-NAV-2" role="tab" aria-controls="MF-NAV-2" aria-selected="false">
+                                                        Shape <span id="span-MF-NAV-2" class="rounded-circle"></span>
+                                                        <input type="hidden" id="2-MHeadingValue" value="shape">
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="mb-4 text-uppercase  mobile-filter color-black fs-15 fw-4 " id="v-pills-3" data-bs-toggle="pill" data-bs-target="#MF-NAV-3" role="tab" aria-controls="MF-NAV-3" aria-selected="false">
+                                                        Color <span id="span-MF-NAV-3" class="rounded-circle"></span>
+                                                        <input type="hidden" id="3-MHeadingValue" value="color">
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="mb-4 text-uppercase  mobile-filter color-black fs-15 fw-4 " id="v-pills-4" data-bs-toggle="pill" data-bs-target="#MF-NAV-4" role="tab" aria-controls="MF-NAV-4" aria-selected="false">
+                                                        Style <span id="span-MF-NAV-4" class="rounded-circle"></span>
+                                                        <input type="hidden" id="4-MHeadingValue" value="style">
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="mb-4 text-uppercase  mobile-filter color-black fs-15 fw-4 " id="v-pills-5" data-bs-toggle="pill" data-bs-target="#MF-NAV-5" role="tab" aria-controls="MF-NAV-5" aria-selected="false">
+                                                        Pattern <span id="span-MF-NAV-5" class="rounded-circle"></span>
+                                                        <input type="hidden" id="5-MHeadingValue" value="pattern">
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="mb-4 text-uppercase  mobile-filter color-black fs-15 fw-4 " id="v-pills-6" data-bs-toggle="pill" data-bs-target="#MF-NAV-6" role="tab" aria-controls="MF-NAV-6" aria-selected="false">
+                                                        Material <span id="span-MF-NAV-6" class="rounded-circle"></span>
+                                                        <input type="hidden" id="6-MHeadingValue" value="material">
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="mb-4 text-uppercase  mobile-filter color-black fs-15 fw-4 " id="v-pills-7" data-bs-toggle="pill" data-bs-target="#MF-NAV-7" role="tab" aria-controls="MF-NAV-7" aria-selected="false">
+                                                        Construction <span id="span-MF-NAV-7" class="rounded-circle"></span>
+                                                        <input type="hidden" id="7-MHeadingValue" value="construction">
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="mb-4 text-uppercase  mobile-filter color-black fs-15 fw-4 " id="v-pills-8" data-bs-toggle="pill" data-bs-target="#MF-NAV-8" role="tab" aria-controls="MF-NAV-8" aria-selected="false">
+                                                        Collection <span id="span-MF-NAV-8" class="rounded-circle"></span>
+                                                        <input type="hidden" id="8-MHeadingValue" value="collection">
+                                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right w-75">
+                                <div class="tab-content mt-4 ps-3 pe-1 navbar-nav-scroll" id="v-pills-tabContent">
+                                                <div class="tab-pane fade active show" id="MF-NAV-1" role="tabpanel" aria-labelledby="v-pills-1">
+                                                    <div class="block">
+                                                        <ul class="list-unstyled">
+                                                                    <li id="div_mf_mob_size-10x14">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-10x14" value="10X14" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="10X14" value="10X14">
+                                                                            <label for="mob_size-10x14" class="fs-14 color-black text-capitalize fw-400"> 10X14 <span id="cou_mob_size-10x14" class="count">(43)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_size-12x15">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-12x15" value="12X15" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="12X15" value="12X15">
+                                                                            <label for="mob_size-12x15" class="fs-14 color-black text-capitalize fw-400"> 12X15 <span id="cou_mob_size-12x15" class="count">(43)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_size-2x3">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-2x3" value="2X3" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="2X3" value="2X3">
+                                                                            <label for="mob_size-2x3" class="fs-14 color-black text-capitalize fw-400"> 2X3 <span id="cou_mob_size-2x3" class="count">(44)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_size-3x5">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-3x5" value="3X5" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="3X5" value="3X5">
+                                                                            <label for="mob_size-3x5" class="fs-14 color-black text-capitalize fw-400"> 3X5 <span id="cou_mob_size-3x5" class="count">(44)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_size-4x6">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-4x6" value="4X6" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="4X6" value="4X6">
+                                                                            <label for="mob_size-4x6" class="fs-14 color-black text-capitalize fw-400"> 4X6 <span id="cou_mob_size-4x6" class="count">(44)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_size-5x8">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-5x8" value="5X8" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="5X8" value="5X8">
+                                                                            <label for="mob_size-5x8" class="fs-14 color-black text-capitalize fw-400"> 5X8 <span id="cou_mob_size-5x8" class="count">(43)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_size-6x9">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-6x9" value="6X9" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="6X9" value="6X9">
+                                                                            <label for="mob_size-6x9" class="fs-14 color-black text-capitalize fw-400"> 6X9 <span id="cou_mob_size-6x9" class="count">(43)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_size-8x10">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-8x10" value="8X10" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="8X10" value="8X10">
+                                                                            <label for="mob_size-8x10" class="fs-14 color-black text-capitalize fw-400"> 8X10 <span id="cou_mob_size-8x10" class="count">(43)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_size-9x12">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_size-9x12" value="9X12" class="me-2 styled-checkbox size" onclick="MobileSetUrl('size')" name="9X12" value="9X12">
+                                                                            <label for="mob_size-9x12" class="fs-14 color-black text-capitalize fw-400"> 9X12 <span id="cou_mob_size-9x12" class="count">(43)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade " id="MF-NAV-2" role="tabpanel" aria-labelledby="v-pills-2">
+                                                    <div class="block">
+                                                        <ul class="list-unstyled">
+                                                                    <li id="div_mf_mob_shape-rectangle">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_shape-rectangle" value="Rectangle" class="me-2 styled-checkbox shape" onclick="MobileSetUrl('shape')" name="Rectangle" value="Rectangle">
+                                                                            <label for="mob_shape-rectangle" class="fs-14 color-black text-capitalize fw-400"> Rectangle <span id="cou_mob_shape-rectangle" class="count">(44)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade " id="MF-NAV-3" role="tabpanel" aria-labelledby="v-pills-3">
+                                                    <div class="block">
+                                                        <ul class="list-unstyled">
+                                                                    <li id="div_mf_mob_color-black">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-black" value="Black" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="Black" value="Black">
+                                                                            <label for="mob_color-black" class="fs-14 color-black text-capitalize fw-400"> Black <span id="cou_mob_color-black" class="count">(11)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_color-blue">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-blue" value="Blue" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="Blue" value="Blue">
+                                                                            <label for="mob_color-blue" class="fs-14 color-black text-capitalize fw-400"> Blue <span id="cou_mob_color-blue" class="count">(4)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_color-brown">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-brown" value="Brown" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="Brown" value="Brown">
+                                                                            <label for="mob_color-brown" class="fs-14 color-black text-capitalize fw-400"> Brown <span id="cou_mob_color-brown" class="count">(1)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_color-dark_gray">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-dark_gray" value="Dark Gray" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="Dark_Gray" value="Dark Gray">
+                                                                            <label for="mob_color-dark_gray" class="fs-14 color-black text-capitalize fw-400"> Dark Gray <span id="cou_mob_color-dark_gray" class="count">(7)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_color-gray">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-gray" value="Gray" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="Gray" value="Gray">
+                                                                            <label for="mob_color-gray" class="fs-14 color-black text-capitalize fw-400"> Gray <span id="cou_mob_color-gray" class="count">(5)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_color-light_blue">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-light_blue" value="Light Blue" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="Light_Blue" value="Light Blue">
+                                                                            <label for="mob_color-light_blue" class="fs-14 color-black text-capitalize fw-400"> Light Blue <span id="cou_mob_color-light_blue" class="count">(2)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_color-light_gray">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-light_gray" value="Light Gray" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="Light_Gray" value="Light Gray">
+                                                                            <label for="mob_color-light_gray" class="fs-14 color-black text-capitalize fw-400"> Light Gray <span id="cou_mob_color-light_gray" class="count">(12)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_color-white">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-white" value="White" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="White" value="White">
+                                                                            <label for="mob_color-white" class="fs-14 color-black text-capitalize fw-400"> White <span id="cou_mob_color-white" class="count">(1)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_color-yellow">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_color-yellow" value="Yellow" class="me-2 styled-checkbox color" onclick="MobileSetUrl('color')" name="Yellow" value="Yellow">
+                                                                            <label for="mob_color-yellow" class="fs-14 color-black text-capitalize fw-400"> Yellow <span id="cou_mob_color-yellow" class="count">(1)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade " id="MF-NAV-4" role="tabpanel" aria-labelledby="v-pills-4">
+                                                    <div class="block">
+                                                        <ul class="list-unstyled">
+                                                                    <li id="div_mf_mob_style-modern">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_style-modern" value="modern" class="me-2 styled-checkbox style" onclick="MobileSetUrl('style')" name="modern" value="modern">
+                                                                            <label for="mob_style-modern" class="fs-14 color-black text-capitalize fw-400"> modern <span id="cou_mob_style-modern" class="count">(44)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade " id="MF-NAV-5" role="tabpanel" aria-labelledby="v-pills-5">
+                                                    <div class="block">
+                                                        <ul class="list-unstyled">
+                                                                    <li id="div_mf_mob_pattern-decade">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_pattern-decade" value="Decade" class="me-2 styled-checkbox pattern" onclick="MobileSetUrl('pattern')" name="Decade" value="Decade">
+                                                                            <label for="mob_pattern-decade" class="fs-14 color-black text-capitalize fw-400"> Decade <span id="cou_mob_pattern-decade" class="count">(7)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_pattern-floweral">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_pattern-floweral" value="Floweral" class="me-2 styled-checkbox pattern" onclick="MobileSetUrl('pattern')" name="Floweral" value="Floweral">
+                                                                            <label for="mob_pattern-floweral" class="fs-14 color-black text-capitalize fw-400"> Floweral <span id="cou_mob_pattern-floweral" class="count">(2)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_pattern-geometrical">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_pattern-geometrical" value="Geometrical" class="me-2 styled-checkbox pattern" onclick="MobileSetUrl('pattern')" name="Geometrical" value="Geometrical">
+                                                                            <label for="mob_pattern-geometrical" class="fs-14 color-black text-capitalize fw-400"> Geometrical <span id="cou_mob_pattern-geometrical" class="count">(34)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_pattern-transational">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_pattern-transational" value="Transational" class="me-2 styled-checkbox pattern" onclick="MobileSetUrl('pattern')" name="Transational" value="Transational">
+                                                                            <label for="mob_pattern-transational" class="fs-14 color-black text-capitalize fw-400"> Transational <span id="cou_mob_pattern-transational" class="count">(1)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade " id="MF-NAV-6" role="tabpanel" aria-labelledby="v-pills-6">
+                                                    <div class="block">
+                                                        <ul class="list-unstyled">
+                                                                    <li id="div_mf_mob_material-silk">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_material-silk" value="Silk" class="me-2 styled-checkbox material" onclick="MobileSetUrl('material')" name="Silk" value="Silk">
+                                                                            <label for="mob_material-silk" class="fs-14 color-black text-capitalize fw-400"> Silk <span id="cou_mob_material-silk" class="count">(4)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_material-wool">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_material-wool" value="Wool" class="me-2 styled-checkbox material" onclick="MobileSetUrl('material')" name="Wool" value="Wool">
+                                                                            <label for="mob_material-wool" class="fs-14 color-black text-capitalize fw-400"> Wool <span id="cou_mob_material-wool" class="count">(35)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_material-wool_and_silk">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_material-wool_and_silk" value="Wool and Silk" class="me-2 styled-checkbox material" onclick="MobileSetUrl('material')" name="Wool_and_Silk" value="Wool and Silk">
+                                                                            <label for="mob_material-wool_and_silk" class="fs-14 color-black text-capitalize fw-400"> Wool and Silk <span id="cou_mob_material-wool_and_silk" class="count">(5)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade " id="MF-NAV-7" role="tabpanel" aria-labelledby="v-pills-7">
+                                                    <div class="block">
+                                                        <ul class="list-unstyled">
+                                                                    <li id="div_mf_mob_construction-tufted">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_construction-tufted" value="Tufted" class="me-2 styled-checkbox construction" onclick="MobileSetUrl('construction')" name="Tufted" value="Tufted">
+                                                                            <label for="mob_construction-tufted" class="fs-14 color-black text-capitalize fw-400"> Tufted <span id="cou_mob_construction-tufted" class="count">(44)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade " id="MF-NAV-8" role="tabpanel" aria-labelledby="v-pills-8">
+                                                    <div class="block">
+                                                        <ul class="list-unstyled">
+                                                                    <li id="div_mf_mob_collection-decade">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_collection-decade" value="Decade" class="me-2 styled-checkbox collection" onclick="MobileSetUrl('collection')" name="Decade" value="Decade">
+                                                                            <label for="mob_collection-decade" class="fs-14 color-black text-capitalize fw-400"> Decade <span id="cou_mob_collection-decade" class="count">(7)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_collection-enchanted_petals">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_collection-enchanted_petals" value="Enchanted Petals" class="me-2 styled-checkbox collection" onclick="MobileSetUrl('collection')" name="Enchanted_Petals" value="Enchanted Petals">
+                                                                            <label for="mob_collection-enchanted_petals" class="fs-14 color-black text-capitalize fw-400"> Enchanted Petals <span id="cou_mob_collection-enchanted_petals" class="count">(2)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_collection-geometric_harmony">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_collection-geometric_harmony" value="Geometric Harmony" class="me-2 styled-checkbox collection" onclick="MobileSetUrl('collection')" name="Geometric_Harmony" value="Geometric Harmony">
+                                                                            <label for="mob_collection-geometric_harmony" class="fs-14 color-black text-capitalize fw-400"> Geometric Harmony <span id="cou_mob_collection-geometric_harmony" class="count">(31)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_collection-geometrical">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_collection-geometrical" value="Geometrical" class="me-2 styled-checkbox collection" onclick="MobileSetUrl('collection')" name="Geometrical" value="Geometrical">
+                                                                            <label for="mob_collection-geometrical" class="fs-14 color-black text-capitalize fw-400"> Geometrical <span id="cou_mob_collection-geometrical" class="count">(3)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li id="div_mf_mob_collection-transcendent_fusion">
+                                                                        <div class="form-group d-flex align-items-center mb-3">
+                                                                            <input type="checkbox" id="mob_collection-transcendent_fusion" value="Transcendent Fusion" class="me-2 styled-checkbox collection" onclick="MobileSetUrl('collection')" name="Transcendent_Fusion" value="Transcendent Fusion">
+                                                                            <label for="mob_collection-transcendent_fusion" class="fs-14 color-black text-capitalize fw-400"> Transcendent Fusion <span id="cou_mob_collection-transcendent_fusion" class="count">(1)</span></label>
+                                                                        </div>
+                                                                    </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter_actions">
+                            <div class="d-flex align-items-center position-fixed bottom-0 w-100">
+                                <div class="left w-50">
+                                    <a href="javascript:void(0)" onclick="MobileAllUnSelectFilter()" class="text-center w-100 py-3 d-block color-black fw-4">CLEAR ALL</a>
+                                </div>
+                                <div class="right w-75">
+                                    <a href="javascript:void(0)" id="divDoneFilter" class="text-center w-100 py-3 d-block primary-bg color-white text-uppercase fw-5">Apply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>

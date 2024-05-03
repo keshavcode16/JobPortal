@@ -63,7 +63,7 @@
                                 {% for product_model in product_models %} 
                                     {% if product_model.base_model.base_slug == 'categories' %}
                                         <li>
-                                            <a href="#" class="d-block text-center color-black fs-16 fw-4 text-uppercase">
+                                            <a href="{% url 'web_store:product_list_view_with_model' model_slug=product_model.model_slug %}" class="d-block text-center color-black fs-16 fw-4 text-uppercase">
                                                 <img src="/mediafiles/models/images/{{product_model.base_model.base_slug}}/{{product_model.model_image|filename}}" alt="category-img1">
                                                 {{product_model.name}}
                                             </a>
