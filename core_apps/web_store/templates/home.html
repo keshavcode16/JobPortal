@@ -107,7 +107,7 @@
                             <div class="col-lg-3 col-md-3 col-12 p-3">
                                 <div class="shop-by-room-details">
                                     <div class="shop-by-img">
-                                        <a href="#">
+                                        <a href="{% url 'web_store:product_list_view_with_model' model_slug=product_model.model_slug %}">
                                             <img src="/mediafiles/models/images/{{product_model.base_model.base_slug}}/{{product_model.model_image|filename}}" alt="shop-by-room-img1" class="w-100 mb-3">
                                         </a>
                                     </div>
@@ -135,43 +135,13 @@
                     {% for product_model in product_models %} 
                         {% if product_model.base_model.base_slug == 'featured-products' %}
                             <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1250px; transform: translate3d(0px, 0px, 0px);"><div class="featured-product-details px-3 slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 250px;">
-                                <a href="#" class="d-block text-center color-black fs-15 fw-4 text-uppercase" tabindex="0">
+                                <a href="{% url 'web_store:product_list_view_with_model' model_slug=product_model.model_slug %}" class="d-block text-center color-black fs-15 fw-4 text-uppercase" tabindex="0">
                                     <img src="/mediafiles/models/images/{{product_model.base_model.base_slug}}/{{product_model.model_image|filename}}" alt="featured-product1" class="mb-3">
                                     {{product_model.name}}
                                 </a>
                             </div>
                         {% endif %}
                     {% endfor %} 
-                </div>
-            </div>
-        </div>
-        <div class="home-shipping-section py-lg-2 py-md-2 py-sm-2 py-2">
-            <div class="container-lg">
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                        <div class="shipping-benefits-detail text-center">
-                            <img src="https://www.resharugs.com/assets/images/benefits-icon1.png" alt="benefits-icon1">
-                            <p class="d-inline-block mb-0 color-black fs-14 fw-3"> Fast &amp; Free Shipping </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                        <div class="shipping-benefits-detail text-center">
-                            <img src="https://www.resharugs.com/assets/images/benefits-icon2.png" alt="benefits-icon1">
-                            <p class="d-inline-block mb-0 color-black fs-14 fw-3"> Free 60 Day Returns </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                        <div class="shipping-benefits-detail text-center">
-                            <img src="https://www.resharugs.com/assets/images/benefits-icon3.png" alt="benefits-icon1">
-                            <p class="d-inline-block mb-0 color-black fs-14 fw-3"> Lowest Prices </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                        <div class="shipping-benefits-detail text-center">
-                            <img src="https://www.resharugs.com/assets/images/benefits-icon4.png" alt="benefits-icon1">
-                            <p class="d-inline-block mb-0 color-black fs-14 fw-3"> 10% Cash Back &amp; More </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
