@@ -15,7 +15,7 @@
                                 <li><a href="/"
                                         class="color-black fs-13 fw-4 text-uppercase">Rugs</a> / </li>
                                 <li><span
-                                        class="color-black fs-13 fw-4 text-uppercase"></span>
+                                        class="color-black fs-13 fw-4 text-uppercase">{{prdouct.name}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -30,11 +30,11 @@
                                 <div class="product-detail-thumbnail-img tab-pane fade show active"
                                     id="prdouct-slider1-tab-pane" role="tabpanel" aria-labelledby="prdouct-slider1-tab"
                                     tabindex="0">
-                                    <a href="https://www.resharugs.com/prod-images/Image1/x-large/IMG_3545.jpg"
+                                    <a href="/mediafiles/products/images/{{product.model.model_slug}}/{{product.product_image|filename}}"
                                         data-fancybox="productGallery">
-                                        <div class="zoom" onmousemove="zoom(event)"
-                                            style="background-image: url(https://www.resharugs.com/prod-images/Image1/x-large/IMG_3545.jpg)">
-                                            <img src="https://www.resharugs.com/prod-images/Image1/large/IMG_3545.jpg"
+                                        <div class="zoom"
+                                            style="background-image: url('/mediafiles/products/images/{{product.model.model_slug}}/{{product.product_image|filename}}')">
+                                            <img src="/mediafiles/products/images/{{product.model.model_slug}}/{{product.product_image|filename}}"
                                                 alt="Product1">
                                         </div>
                                     </a>
@@ -45,7 +45,7 @@
                                     <button class="nav-link active" id="prdouct-slider1-tab" data-bs-toggle="tab"
                                         data-bs-target="#prdouct-slider1-tab-pane" type="button" role="tab"
                                         aria-controls="home-tab-pane" aria-selected="true">
-                                        <img src="https://www.resharugs.com/prod-images/Image1/small/IMG_3545.jpg"
+                                        <img src="/mediafiles/products/images/{{product.model.model_slug}}/{{product.product_image|filename}}"
                                             alt="">
                                     </button>
                                 </li>
@@ -97,7 +97,8 @@
                                         "close"
                                     ],
                                     loop: false,
-                                    protect: true
+                                    protect: true,
+                                    hideClass: "f-scaleOut"
                                 });
 
                             </script>
@@ -111,7 +112,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="d-flex product-heading-line">
-                                    <h1 class="fs-30 fw-3 text-capitalize color-black">{{prdouct.name}}</h1>
+                                    <h1 class="fs-30 fw-3 text-capitalize color-black">@{{prdouct.name}}</h1>
                                     <div class="product-share-icon ">
                                         <a href="#" class="d-flex">
                                             <span class="fs-16 color-black">Share : </span>
@@ -121,13 +122,13 @@
 
                                     </div>
                                 </div>
-                                <span class="fs-15 fw-3 color-black d-block mb-1">COLOR : MANGO/SOFT CORAL</span>
+                                <span class="fs-15 fw-3 color-black d-block mb-1">COLOR : {{prdouct.color}}</span>
                                 <div class="product-color-rugs color-black d-block mb-2">
                                     <ul class="d-flex">
                                         <li class="product-active">
                                             <a
-                                                href="https://www.resharugs.com/rugs/rrtwl-48-dark-gray-light-gray-tufted-rugs"><img
-                                                    src="https://www.resharugs.com/prod-images/image1/large/IMG_3545.jpg"
+                                                href="{% url 'web_store:product_view_with_model' product_slug=product.product_slug %}"><img
+                                                    src="/mediafiles/products/images/{{product.model.model_slug}}/{{product.product_image|filename}}"
                                                     alt="color-rug1"></a>
                                         </li>
 
@@ -291,69 +292,21 @@
                                             <ul class="d-flex mb-0">
                                                 <li class="fs-18 fw-4">Contact Us :</li>
                                                 <li class="mx-1"><a href="tel:18884641447"><img
-                                                            src="https://www.resharugs.com/assets/images/product-contact-icon1.svg"
+                                                            src="{% static 'product/contact1.svg' %}"
                                                             alt="Contact-icon1"></a></li>
                                                 <li class="mx-1"><a href="tel:18884641447"><img
-                                                            src="https://www.resharugs.com/assets/images/product-contact-icon2.svg"
+                                                            src="{% static 'product/contact2.svg' %}"
                                                             alt="Contact-icon2"></a></li>
                                                 <li class="mx-1"><a href="tel:18884641447"><img
-                                                            src="https://www.resharugs.com/assets/images/product-contact-icon3.svg"
+                                                            src="{% static 'product/contact3.svg' %}"
                                                             alt="Contact-icon3"></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="product-action-btn d-flex">
-                                        <a href="javascript:void(0)" onclick="ProductNotApplyAction()">Add to
-                                            cart</a>
-                                        <a href="javascript:void(0)"
-                                            onclick="ProductAddtoWishlistAction('RRTWL-48-0001')"> Add to
-                                            wishlist</a>
+                                        <a href="javascript:void(0)">Add to cart</a>
+                                        <a href="javascript:void(0)"> Add to wishlist</a>
                                     </div>
-
-
-                                    <script>
-                                        function ProductAddtoCartAction(CurrencyCode, ImageName, Barcode) {
-                                            document.getElementById('loadingDIV').style.display = 'block';
-                                            var ProductQuantity = $('#ddlProductQuantity').val();
-                                            console.log(ProductQuantity);
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: 'https://www.resharugs.com/Checkout/ProductAddToCart',
-                                                data: { CurrencyCode: CurrencyCode, ImageName: ImageName, Barcode: Barcode, Quantity: ProductQuantity },
-                                                datatype: 'json',
-                                                success: function (data) {
-                                                    document.getElementById('loadingDIV').style.display = 'none';
-                                                    if (data.match('error')) {
-                                                        $('#P_errortext').text(data.replace("error", ""));
-                                                        $('#div_errorMessage').removeClass("d-none");
-                                                        $('#div_errorMessage').addClass("d-block");
-                                                        console.log(data);
-                                                    }
-                                                    else {
-                                                        $("#div_CartMasterPopup").empty();
-                                                        $("#div_CartMasterPopup").html(data);
-                                                        var offcanvasElement = document.getElementById("div_CartPopup");
-                                                        var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
-                                                        offcanvas.toggle();
-                                                    }
-
-                                                },
-                                                error: function (data) {
-                                                    var r = jQuery.parseJSON(data.responseText);
-                                                    alert("Message: " + r.Message);
-                                                    alert("StackTrace: " + r.StackTrace);
-                                                    alert("ExceptionType: " + r.ExceptionType);
-                                                }
-                                            });
-                                        }
-
-
-                                        function ProductNotApplyAction() {
-                                            $('#P_errortext').text("Please select the size.");
-                                            $('#div_errorMessage').removeClass("d-none");
-                                            $('#div_errorMessage').addClass("d-block");
-                                        }
-                                    </script>
                                 </div>
                             </div>
                             <div class="product-detail-information pb-0">
@@ -363,16 +316,9 @@
                                             data-bs-toggle="tab" data-bs-target="#product-details-tab-pane"
                                             type="button" role="tab" aria-controls="product-details-tab-pane"
                                             aria-selected="true">Overview</a>
-                                        <a class="nav-item nav-link" id="care-tab" data-bs-toggle="tab"
-                                            data-bs-target="#care-tab-pane" type="button" role="tab"
-                                            aria-controls="care-tab-pane" aria-selected="false">Specifications</a>
                                         <a class="nav-item nav-link" id="description-tab" data-bs-toggle="tab"
                                             data-bs-target="#description-tab-pane" type="button" role="tab"
                                             aria-controls="description-tab-pane" aria-selected="false">Description</a>
-                                        <a class="nav-item nav-link" id="shipping-tab" data-bs-toggle="tab"
-                                            data-bs-target="#shipping-tab-pane" type="button" role="tab"
-                                            aria-controls="shipping-tab-pane" aria-selected="false">Shipping
-                                            Info</a>
                                         <!--<a class="nav-item nav-link" id="enquiry-tab" data-bs-toggle="tab" data-bs-target="#enquiry-tab-pane" type="button" role="tab" aria-controls="enquiry-tab-pane" aria-selected="false">Enquiry Form</a>-->
                                     </div>
                                 </nav>
@@ -397,7 +343,7 @@
                                                         <a href="javascript:void(0)">
                                                             <div class="d-flex">
                                                                 <div class="product-detail-overview-img">
-                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon1.svg"
+                                                                    <img src="{% static 'product/benefit1.svg' %}"
                                                                         alt="product-overview-icon1">
                                                                 </div>
                                                                 Low: 3/8''- 1/2''
@@ -408,7 +354,7 @@
                                                         <a href="javascript:void(0)">
                                                             <div class="d-flex">
                                                                 <div class="product-detail-overview-img">
-                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon2.svg"
+                                                                    <img src="{% static 'product/benefit2.svg' %}"
                                                                         alt="product-overview-icon2">
                                                                 </div>
                                                                 Pet-Friendly
@@ -419,7 +365,7 @@
                                                         <a href="javascript:void(0)">
                                                             <div class="d-flex">
                                                                 <div class="product-detail-overview-img">
-                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon3.svg"
+                                                                    <img src="{% static 'product/benefit3.svg' %}"
                                                                         alt="product-overview-icon3">
                                                                 </div>
                                                                 Kid-Friendly
@@ -430,7 +376,7 @@
                                                         <a href="javascript:void(0)">
                                                             <div class="d-flex">
                                                                 <div class="product-detail-overview-img">
-                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon4.svg"
+                                                                    <img src="{% static 'product/benefit4.svg' %}"
                                                                         alt="product-overview-icon4">
                                                                 </div>
                                                                 High Traffic
@@ -441,7 +387,7 @@
                                                         <a href="javascript:void(0)">
                                                             <div class="d-flex">
                                                                 <div class="product-detail-overview-img">
-                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon5.svg"
+                                                                    <img src="{% static 'product/benefit5.svg' %}"
                                                                         alt="product-overview-icon1">
                                                                 </div>
                                                                 Durable
@@ -452,7 +398,7 @@
                                                         <a href="javascript:void(0)">
                                                             <div class="d-flex">
                                                                 <div class="product-detail-overview-img">
-                                                                    <img src="https://www.resharugs.com/assets/images/product-overview-icon1.svg"
+                                                                    <img src="{% static 'product/benefit1.svg' %}"
                                                                         alt="product-overview-icon1">
                                                                 </div>
                                                                 Low: 3/8''- 1/2''
@@ -461,72 +407,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="care-tab-pane" role="tabpanel"
-                                        aria-labelledby="care-tab" tabindex="0">
-                                        <div class="tap-mob-heading position-relative"><a href="#care-tab-pane"
-                                                class="mob-tabpane-toggler">Specifications</a>
-                                            <div class="product-info-arrow-icon">
-                                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'
-                                                    fill='#212529'>
-                                                    <path fill-rule='evenodd'
-                                                        d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' />
-                                                </svg>
-                                            </div>
-
-                                        </div>
-                                        <div class="tabpane-inner-content">
-                                            <table width="100%" class="text-capitalize">
-                                                <tr>
-                                                    <td>Design ID</td>
-                                                    <td>RRTWL-48</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Color Family</td>
-                                                    <td>Dark Gray</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>GR Color</td>
-                                                    <td>Dark Gray</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>BR Color</td>
-                                                    <td>Light Gray</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Quality</td>
-                                                    <td>Tufted</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Material</td>
-                                                    <td>100% Wool</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Construction</td>
-                                                    <td>Tufted</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Thickness</td>
-                                                    <td>22-25 MM</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Location</td>
-                                                    <td>indoor use only</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Designer</td>
-                                                    <td>Aftab</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Made In</td>
-                                                    <td>India</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Custom Sizes</td>
-                                                    <td>Available</td>
-                                                </tr>
-                                            </table>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="description-tab-pane" role="tabpanel"
@@ -579,30 +459,6 @@
                                                 plush comfort. Redefine your living space with this symphony of
                                                 shapes, a testament to contemporary elegance.
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="shipping-tab-pane" role="tabpanel"
-                                        aria-labelledby="shipping-tab" tabindex="0">
-                                        <div class="tap-mob-heading position-relative"><a href="#shipping-tab-pane"
-                                                class="mob-tabpane-toggler">Shipping Info
-                                            </a>
-                                            <div class="product-info-arrow-icon">
-                                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'
-                                                    fill='#212529'>
-                                                    <path fill-rule='evenodd'
-                                                        d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="tabpane-inner-content">
-                                            shedding is a natural property of new rug.|do not brush or scrub the
-                                            rug.|only vacuum clean it periodically. avoid using vacuum beater brush
-                                            mode.|if spills occur, blot immediately. do not rub the stain.|rotate
-                                            occasionally to equalize wear.|use protectors under the legs of heavy
-                                            furniture to avoid flattening and piling.|if thread comes out do not
-                                            pull the yarn, trim with scissor.|periodic professional cleaning
-                                            recommended.|do not fold the rug.|avoid using the rug in damp or wet
-                                            surface.
                                         </div>
                                     </div>
                                 </div>

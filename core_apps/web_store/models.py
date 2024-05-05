@@ -121,14 +121,17 @@ class ProductModel(models.Model):
 
 class Product(models.Model):
     """
-    Ongoing Post thread before publishing post
+    Product that belongs to product models
     """
-    name = models.CharField(max_length=120, verbose_name="Model Name")
+    name = models.CharField(max_length=120, verbose_name="Product Name")
     product_slug = models.SlugField() 
     description = models.TextField()
     model = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name="%(app_label)s_%(class)s_related")
     unit_price = models.ForeignKey(UnitPrice, on_delete=models.CASCADE, related_name="%(app_label)s_%(class)s_related")
     product_image = models.ImageField(null=True, blank=True, upload_to=product_image_directory_path, verbose_name="Product Image")
+    x_large_image = models.ImageField(null=True, blank=True, upload_to=product_image_directory_path, verbose_name="Product X Large Image")
+    color = models.CharField(max_length=120)
+    color_code = models.CharField(max_length=20, null=True, blank=True, verbose_name="Color Code")
     tags = models.ManyToManyField(
         'web_store.Tag', related_name='web_store_tags'
     )

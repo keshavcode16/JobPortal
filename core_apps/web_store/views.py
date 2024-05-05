@@ -51,9 +51,10 @@ def product_list_view_with_model(request, model_slug):
 
 def product_view_with_model(request, product_slug):
     context = {}
-    product_qs = Product.objects.filter(product_slug=product_slug)
+    product_qs = Product.objects.filter(product_slug=product_slug, is_draft=False)
     if product_qs.exists():
         product_obj = product_qs.first()
+        print("==========================Product==exists=======",product_obj)
         context['product'] = product_obj
     return render(request, "product.html", context)
 
