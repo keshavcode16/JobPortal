@@ -4,8 +4,8 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-python manage.py collectstatic --noinput
-python manage.py makemigrations
-python manage.py migrate
+python /app/manage.py collectstatic --noinput
+python /app/manage.py makemigrations
+python /app/manage.py migrate
 
 exec /usr/local/bin/gunicorn homedecor.wsgi --bind 0.0.0.0:1998 --chdir=/app
