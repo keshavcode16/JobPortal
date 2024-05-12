@@ -4,4 +4,4 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-exec celery -A authors_api.celery worker -l INFO
+exec celery -A homedecor.celery worker -l INFO

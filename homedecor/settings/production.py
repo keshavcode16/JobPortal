@@ -1,14 +1,14 @@
 from .base import *  # noqa
 from .base import env
 
-ADMINS = [("Alpha Omondi Ogilo", "api.imperfect@gmail.com")]
+ADMINS = [("Home Decor", "api.imperfect@gmail.com")]
 
 # TODO add domain names of the production server
-CSRF_TRUSTED_ORIGINS = ["https://trainingwebdev.com"]
+CSRF_TRUSTED_ORIGINS = ["https://havenstyledecor.com"]
 
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["trainingwebdev.com"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["havenstyledecor.com"])
 
 ADMIN_URL = env("DJANGO_ADMIN_URL")
 
@@ -37,24 +37,24 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_FROM_EMAIL = env(
     "DJANGO_DEFAULT_FROM_EMAIL",
-    default="Authors Haven Support <support@trainingwebdev.com>",
+    default="Haven Style Decor Support <support@havenstyledecor.com>",
 )
 
-SITE_NAME = "Authors Haven"
+SITE_NAME = "Haven Style Decor"
 
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 
-EMAIL_SUBJECT_PREFIX = env(
-    "DJANGO_EMAIL_SUBJECT_PREFIX",
-    default="[Authors Haven]",
-)
+# EMAIL_SUBJECT_PREFIX = env(
+#     "DJANGO_EMAIL_SUBJECT_PREFIX",
+#     default="[Haven Style Decor]",
+# )
 
-EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
-EMAIL_HOST = "smtp.mailgun.org"
-EMAIL_HOST_USER = "postmaster@mg.trainingwebdev.com"
-EMAIL_HOST_PASSWORD = env("SMTP_MAILGUN_PASSWORD")
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+# EMAIL_HOST = "smtp.mailgun.org"
+# EMAIL_HOST_USER = "postmaster@mg.havenstyledecor.com"
+# EMAIL_HOST_PASSWORD = env("SMTP_MAILGUN_PASSWORD")
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
 DOMAIN = env("DOMAIN")
 
 LOGGING = {
@@ -68,11 +68,6 @@ LOGGING = {
         }
     },
     "handlers": {
-        "mail_admins": {
-            "level": "ERROR",
-            "filters": ["require_debug_false"],
-            "class": "django.utils.log.AdminEmailHandler",
-        },
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
@@ -82,12 +77,12 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
         "django.request": {
-            "handlers": ["mail_admins"],
+            "handlers": ["console"],
             "level": "ERROR",
             "propagate": True,
         },
         "django.security.DisallowedHost": {
-            "handlers": ["console", "mail_admins"],
+            "handlers": ["console",],
             "level": "ERROR",
             "propagate": True,
         },
