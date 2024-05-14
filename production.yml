@@ -1,14 +1,6 @@
 version: "3.9"
 
 services:
-    es:
-        image: elasticsearch:7.17.9
-        environment:
-            - discovery.type=single-node
-        ports:
-            - "9200:9200"
-        networks:
-            - reverseproxy_nw
     api: &api
         build:
             context: .
@@ -24,7 +16,6 @@ services:
         depends_on:
             - postgres
             - redis
-            - es
         networks:
             - reverseproxy_nw
 
