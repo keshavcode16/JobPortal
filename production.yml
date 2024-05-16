@@ -8,7 +8,6 @@ services:
         command: /start
         image: homedecor
         volumes:
-            - .:/app:z
             - static_volume:/app/staticfiles
             - media_volume:/app/mediafiles
         env_file:

@@ -69,10 +69,6 @@ COPY --chown=django:django . ${APP_HOME}
 
 RUN chown django:django ${APP_HOME}
 
-RUN chown django:django ${APP_HOME}/core_apps
-
-RUN chmod 775 ${APP_HOME}/core_apps
-
 USER django
 
 ENTRYPOINT [ "/entrypoint" ]
