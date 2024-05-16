@@ -69,6 +69,8 @@ COPY --chown=django:django . ${APP_HOME}
 
 RUN chown django:django ${APP_HOME}
 
+RUN chown django:django .
+
 USER django
 
 ENTRYPOINT [ "/entrypoint" ]
