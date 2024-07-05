@@ -1,0 +1,55 @@
+{% extends 'employer/base.html'%}
+{% load custom_tags %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="max-w-screen-xl mx-auto p-4">
+    <div class="flex flex-col items-center justify-between space-y-5">
+        <div class="w-full">
+            {% for object in object_list %}
+                <div class="m-5">
+                    <div class="group mx-2 mt-10 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto">
+                        
+                        <div class="col-span-11 flex flex-col pr-8 text-left sm:pl-4">
+                            <a href="#" class="mb-3 overflow-hidden pr-7 text-lg font-semibold sm:text-xl">{{object.job_post.title}}</a>
+                            <p class="overflow-hidden pr-7 text-sm">{{object.job_post.description|slice:":200" }}{% if object.job_post.description|length > 200 %}...{% endif %}</p>
+                            <div class="mt-4 px-4 py-2 flex flex-wrap items-center justify-start">
+                                <span class="max-w-40 truncate whitespace-nowrap inline-block py-1.5 px-3 rounded-lg text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">APPLIED BY</span>
+                              </div>
+                            <div class="mt-4 px-4 py-2 flex flex-wrap items-center justify-start">
+                            <div class="flex items-center">
+                                <span class="inline-block size-[62px] bg-gray-100 rounded-full overflow-hidden">
+                                <svg class="size-full text-gray-300" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0.62854" y="0.359985" width="15" height="15" rx="7.5" fill="white"></rect>
+                                    <path d="M8.12421 7.20374C9.21151 7.20374 10.093 6.32229 10.093 5.23499C10.093 4.14767 9.21151 3.26624 8.12421 3.26624C7.0369 3.26624 6.15546 4.14767 6.15546 5.23499C6.15546 6.32229 7.0369 7.20374 8.12421 7.20374Z" fill="currentColor"></path>
+                                    <path d="M11.818 10.5975C10.2992 12.6412 7.42106 13.0631 5.37731 11.5537C5.01171 11.2818 4.69296 10.9631 4.42107 10.5975C4.28982 10.4006 4.27107 10.1475 4.37419 9.94123L4.51482 9.65059C4.84296 8.95684 5.53671 8.51624 6.30546 8.51624H9.95231C10.7023 8.51624 11.3867 8.94749 11.7242 9.62249L11.8742 9.93184C11.968 10.1475 11.9586 10.4006 11.818 10.5975Z" fill="currentColor"></path>
+                                </svg>
+                                </span>
+                                <div class="ms-3">
+                                <h3 class="font-semibold text-gray-800 dark:text-white">{{object.user.first_name}} {{object.user.last_name}}</h3>
+                                <p class="text-sm font-medium text-gray-400 dark:text-neutral-500">{{object.user.email}}</p>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="mt-5 flex flex-col space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
+                                <div class="">Experience:
+                                    <span class="ml-2 mr-3 rounded-full bg-green-100 px-2 py-0.5 text-green-900">{{object.job_post.experience_years}} years {{object.job_post.experience_months}} months </span>
+                                </div>
+                                <div class="">
+                                    Skills:
+                                    {% for skill in object.job_post.skills.all %}
+                                        <span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">{{ skill }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

@@ -6,7 +6,7 @@ services:
             context: .
             dockerfile: ./docker/production/django/Dockerfile
         command: /start
-        image: homedecor
+        image: jobportal
         volumes:
             - static_volume:/app/staticfiles
             - media_volume:/app/mediafiles
@@ -23,7 +23,7 @@ services:
         build:
             context: .
             dockerfile: ./docker/production/postgres/Dockerfile
-        image: homedecor_database
+        image: jobportal_database
         volumes:
             - production_postgres_data:/var/lib/postgresql/data
             - production_postgres_data_backups:/backups
@@ -39,14 +39,14 @@ services:
 
     celery_worker:
         <<: *api
-        image: homedecor_celery_worker
+        image: jobportal_celery_worker
         command: /start-celeryworker
         networks:
             - reverseproxy_nw
 
     flower:
         <<: *api
-        image: homedecor_flower
+        image: jobportal_flower
         command: /start-flower
         volumes:
             - flower_data:/data

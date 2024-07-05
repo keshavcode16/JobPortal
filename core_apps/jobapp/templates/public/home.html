@@ -1,0 +1,41 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
+  <link href="{% static 'css/home.css' %}" rel="stylesheet" />
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+      <div class="flex justify-center items-center min-h-screen bg-gray-200">
+        <div class="bg-white rounded-lg shadow-md px-8 py-10 max-w-md w-full grid grid-cols-2 gap-4">
+          <div class="text-center space-y-6 relative">
+            <h2 class="text-xl font-bold">Register As Employer</h2>
+            <p class="text-gray-500">Manage job postings and applications</p>
+            <a href="{% url 'jobapp:register_view' user_type='employer' %}" class="block mt-4 px-3 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500">Register</a>
+          </div>
+          <div class="text-center space-y-6 relative">
+            <h2 class="text-xl font-bold">Register As Job Seeker</h2>
+            <p class="text-gray-500">Find your dream job</p>
+            <a href="{% url 'jobapp:register_view' user_type='user' %}" class="block mt-4 px-3 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500">Register</a>
+          </div>
+        </div>
+      </div>
+      <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+</body>
+</html>
+
+
+

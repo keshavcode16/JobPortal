@@ -32,7 +32,7 @@ volume:
 	docker volume inspect src_local_postgres_data
 
 admin-db:
-	docker compose -f local.yml exec postgres psql --username=homedecor --dbname=homedecordb
+	docker compose -f local.yml exec postgres psql --username=portaluser --dbname=jobdb
 
 flake8:
 	docker compose -f local.yml exec api flake8 .

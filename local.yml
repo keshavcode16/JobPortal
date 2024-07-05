@@ -19,9 +19,8 @@ services:
             - ./.envs/.local/.postgres
         depends_on:
             - postgres
-            - mailhog
         networks:
-            - homedecor-app
+            - jobportal-app
 
     postgres:
         build:
@@ -32,20 +31,12 @@ services:
         env_file:
             - ./.envs/.local/.postgres
         networks:
-            - homedecor-app
-
-    mailhog:
-        image: mailhog/mailhog:v1.0.0
-        container_name: mailhog
-        ports:
-            - "8025:8025"
-        networks:
-            - homedecor-app
+            - jobportal-app
     
     redis:
         image: redis:7-alpine
         networks:
-            - homedecor-app
+            - jobportal-app
 
     celery_worker:
         build:
@@ -60,27 +51,8 @@ services:
         depends_on:
             - redis
             - postgres
-            - mailhog
         networks:
-            - homedecor-app
-
-    flower:
-        build:
-            context: .
-            dockerfile: ./docker/local/django/Dockerfile
-        command: /start-flower
-        volumes:
-            - flower_data:/data
-        env_file:
-            - ./.envs/.local/.django
-            - ./.envs/.local/.postgres
-        ports:
-            - "5555:5555"
-        depends_on:
-            - redis
-            - postgres
-        networks:
-            - homedecor-app
+            - jobportal-app
 
     nginx:
         restart: always
@@ -95,14 +67,13 @@ services:
         ports:
             - "8080:80"
         networks:
-            - homedecor-app
+            - jobportal-app
 
 networks:
-    homedecor-app:
+    jobportal-app:
         driver: bridge
 
 volumes:
     static_volume:
     media_volume:
     local_postgres_data: {}
-    flower_data: {}
