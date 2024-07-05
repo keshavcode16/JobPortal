@@ -133,7 +133,6 @@ class UserJobView(LoginRequiredMixin, View):
             applied_job_app_object = JobApplication.objects.filter(job_post=job_object,user=user_object).first()
             if applied_job_app_object is not None:
                 context['allowed_to_apply']  = False
-                
             context['job'] = job_object 
         return render(request, self.template_name, context=context)
 
@@ -159,6 +158,7 @@ class ApplyJobView(LoginRequiredMixin, View):
                 messages.success(request, "Job has been applied successfully")
             else:
                 context['allowed_to_apply']  = False
+                messages.success(request, "You  have already applied jobs")
         except Exception as err:
             messages.error(request, f"Error in applying job {str(err)}")
         return render(request, self.template_name, context=context)
