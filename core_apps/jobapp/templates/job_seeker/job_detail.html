@@ -70,7 +70,6 @@
                 </div>
               </div>
               <div class="mt-4 px-4 py-2 flex items-center justify-start">
-
                 {% if allowed_to_apply %}
                     <a href="{% url 'jobapp:apply_job_view'  job_id=job.pk  %}" class="inline-block">
                         <button class="flex items-center gap-2 px-4 py-2 font-sans text-2xl font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none text-white absolute mp-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -82,12 +81,9 @@
                     </a>
                 {% else %}
                     <a href="{% url 'jobapp:job_detail_view'  job_id=job.pk  %}" class="inline-block">
-                        <button class="flex items-center gap-2 px-4 py-2 font-sans text-2xl font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none text-white absolute mp-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Applied
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
-                        </svg>
-                        </button>
+                      <button class="flex items-center gap-2 px-4 py-2 font-sans text-2xl font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none text-white absolute mp-10 bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                          Applied
+                      </button>
                     </a>
                 {% endif %}
               </div>

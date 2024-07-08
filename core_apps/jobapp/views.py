@@ -196,32 +196,49 @@ class ProfileView(LoginRequiredMixin, View):
     form_class = user_forms.UpdateEmployerForm
     login_url = '/auth/login'
     
-    def get(self, request, employer_id):
+    def get(self, request, user_type, user_id):
         context = {}
-        employer = get_object_or_404(Employer, id=employer_id)
-        profile_form = self.form_class(instance=employer)
-        context['profile_form'] = profile_form 
-        context['employer_object'] = employer 
-        context['full_name'] = employer.get_full_name() 
+        if user_type == 'employer':
+            employer = get_object_or_404(Employer, id=user_id)
+            profile_form = self.form_class(instance=employer)
+            context['profile_form'] = profile_form 
+            context['employer_object'] = employer 
+            context['full_name'] = employer.get_full_name() 
+        elif user_type == 'user':
+            self.template_name = 'job_seeker/profile.html'
+            user_object = get_object_or_404(JobSeeker, id=user_id)
+            profile_form = user_forms.JobSeekerForm(instance=user_object)
+            context['profile_form'] = profile_form 
+            context['user_object'] = user_object 
+            context['full_name'] = user_object.get_full_name() 
         return render(request, self.template_name, context=context)
     
-    def post(self, request, employer_id):
-        employer = get_object_or_404(Employer, id=employer_id)
+    def post(self, request, user_type, user_id):
+        
+        if user_type == 'employer':
+            instance = get_object_or_404(Employer, id=user_id)
+        elif user_type == 'user':
+            self.template_name = 'job_seeker/profile.html'
+            instance = get_object_or_404(JobSeeker, id=user_id)
         if request.method == 'POST':
-            form = self.form_class(request.POST, instance=employer)
+            if user_type == 'employer':
+                form = self.form_class(request.POST, instance=instance)
+            elif  user_type == 'user':
+                form = user_forms.JobSeekerForm(request.POST, instance=instance)
             
             if form.is_valid():
                 form.save()
-                messages.success(request, "Employer account updated successfully.") 
-                return redirect(reverse('jobapp:profile_view', kwargs={'employer_id': employer_id})) 
+                resMessage = "Employer account has updated successfully." if user_type == 'employer' else "User account has updated successfully."
+                messages.success(request, resMessage) 
+                logger.info(f"Profile Upadted successfully rendered message: {resMessage}")
+                return redirect(reverse('jobapp:profile_view', kwargs={'user_id': user_id, 'user_type': user_type})) 
             else:
                 if '__all__' in form.errors.as_data():
                     messages.error(request, ''.join(form.errors.as_data()['__all__'][0]))
                 else:
                     err_messages = get_all_form_errors(form)
                     messages.error(request, err_messages)
-        message = 'Login failed!'
-        return render(request, self.template_name, context={'form': form, 'message': message})
+        return render(request, self.template_name, context={'form': form, 'user_id': user_id})
 
 
 
@@ -263,7 +280,7 @@ class JobPostView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             messages.success(request, "Job updated successfully." if job_id else "Job created successfully.")
-            return redirect(reverse('jobapp:profile_view', kwargs={'employer_id': employer_id}))
+            return redirect(reverse('jobapp:profile_view', kwargs={'user_id': employer_id, 'user_type':'employer'}))
         else:
             logger.error(f'Got Error form.errors {form.errors}')
             if '__all__' in form.errors.as_data():
@@ -337,7 +354,7 @@ def register_view(request, user_type):
         form = user_forms.CreateEmployerForm() 
     elif (user_type == 'user'):
         meta_text = "Register As Job Seeker"
-        form = user_forms.CreateJobSeekerForm() 
+        form = user_forms.JobSeekerForm() 
 
     if request.method == 'POST':
         resSuccessMsg = ""
@@ -346,7 +363,7 @@ def register_view(request, user_type):
             form = user_forms.CreateEmployerForm(request.POST)
         elif (user_type == 'user'):
             resSuccessMsg = "User has been registered successfully!"
-            form = user_forms.CreateJobSeekerForm(request.POST)
+            form = user_forms.JobSeekerForm(request.POST)
 
         if form.is_valid():
             form.save()

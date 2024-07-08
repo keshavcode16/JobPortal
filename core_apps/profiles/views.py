@@ -1,18 +1,13 @@
-import json
-from django.core.serializers.json import DjangoJSONEncoder
-from rest_framework import serializers, status
-from rest_framework.exceptions import NotFound
+from rest_framework import status
 from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-#my local imports
+#local imports
 from .exceptions import ProfileDoesNotExist
 from .models import Profile
-from .renderers import ProfileJSONRenderer, FollowersJSONRenderer, FollowingJSONRenderer
 from .serializers import ProfileSerializer
-# from core_apps.web_store.models import ProductModel
 import logging
 logger = logging.getLogger("loggers")
 
