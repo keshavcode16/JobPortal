@@ -230,38 +230,50 @@ class JobPostView(LoginRequiredMixin, View):
     form_class = CreateJobPostForm
     login_url = '/auth/login'
     
-    def get(self, request, employer_id):
+    def get(self, request, employer_id, job_id=None):
         context = {}
         employer = get_object_or_404(Employer, id=employer_id)
-        job_form = self.form_class()
+        context['employer_object'] = employer
+        context['full_name'] = employer.get_full_name()
+        
+        if job_id:
+            job_post = get_object_or_404(JobPost, id=job_id)
+            job_form = self.form_class(instance=job_post)
+        else:
+            job_form = self.form_class()
+        
         context['form'] = job_form 
-        context['employer_object'] = employer 
-        context['full_name'] = employer.get_full_name() 
         return render(request, self.template_name, context=context)
     
-    def post(self, request, employer_id):
+    def post(self, request, employer_id, job_id=None):
         context = {}
-        form = self.form_class()
+        form = self.form_class(request.POST)
         employer = get_object_or_404(Employer, id=employer_id)
-        context['employer_object'] = employer 
-        context['full_name'] = employer.get_full_name() 
-        if request.method == 'POST':
-            form = self.form_class(request.POST, created_by=employer)
-            form.instance.created_by = employer
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Jobs created successfully.") 
-                return redirect(reverse('jobapp:profile_view', kwargs={'employer_id': employer_id})) 
+        context['employer_object'] = employer
+        context['full_name'] = employer.get_full_name()
+        context['update_job'] = False
+        
+        if job_id:
+            context['update_job'] = True
+            job_post = get_object_or_404(JobPost, id=job_id)
+            form = self.form_class(request.POST, instance=job_post)
+        
+        form.instance.created_by = employer
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Job updated successfully." if job_id else "Job created successfully.")
+            return redirect(reverse('jobapp:profile_view', kwargs={'employer_id': employer_id}))
+        else:
+            logger.error(f'Got Error form.errors {form.errors}')
+            if '__all__' in form.errors.as_data():
+                messages.error(request, ''.join(form.errors.as_data()['__all__'][0]))
             else:
-                logger.error(f'Got Error form.errors {form.errors}')
-                if '__all__' in form.errors.as_data():
-                    messages.error(request, ''.join(form.errors.as_data()['__all__'][0]))
-                else:
-                    err_messages = get_all_form_errors(form)
-                    messages.error(request, err_messages) 
+                err_messages = get_all_form_errors(form)
+                messages.error(request, err_messages) 
+        
         context['form'] = form
         return render(request, self.template_name, context=context)
-
 
 
 class JobListView(LoginRequiredMixin, ListView): 

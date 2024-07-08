@@ -19,7 +19,7 @@ from core_apps.common.models import Skill, Qualification
 class CreateJobPostForm(d_forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
-        self.created_by = kwargs.pop('created_by', False)
+        self.created_by = kwargs.pop('created_by', None)
         super(CreateJobPostForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs.update({
@@ -63,7 +63,7 @@ class CreateJobPostForm(d_forms.ModelForm):
                     data-ripple-light="true"
                     class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
                     >
-                    Create Job Post
+                    {'Update Job Post' if self.instance else 'Create Job Post'}
                 </button>
             """
             ),
@@ -74,12 +74,10 @@ class CreateJobPostForm(d_forms.ModelForm):
         self.fields['experience_years'].required = True
         self.fields['experience_months'].required = True
         self.fields['description'].required = True
-          
 
     def clean(self):
         cleaned_data = super().clean()
         return cleaned_data
-
 
     class Meta:
         model = JobPost
@@ -87,4 +85,3 @@ class CreateJobPostForm(d_forms.ModelForm):
         widgets = {
             'skills': d_forms.SelectMultiple()
         }
-    
