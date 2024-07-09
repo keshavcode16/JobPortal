@@ -9,8 +9,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-
-
 class Qualification(models.Model):
     name = models.CharField(max_length=500)
     status = models.BooleanField(u'Status', default=True)

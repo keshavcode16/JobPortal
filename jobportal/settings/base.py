@@ -374,3 +374,8 @@ DEFAULT_FROM_EMAIL = env(
 # EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
 
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'  # Replace with your Elasticsearch server details
+    },
+}
