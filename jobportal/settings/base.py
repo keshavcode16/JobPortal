@@ -47,7 +47,9 @@ THIRD_PARTY_APPS = [
     "taggit",
     "mptt",
     "import_export",
-    "rangefilter"
+    "rangefilter",
+    "django_elasticsearch_dsl",
+    "django_elasticsearch_dsl_drf"
 ]
 
 LOCAL_APPS = [
@@ -55,6 +57,7 @@ LOCAL_APPS = [
     "core_apps.profiles",
     "core_apps.jobapp",
     "core_apps.common",
+    "core_apps.search",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -376,6 +379,6 @@ DEFAULT_FROM_EMAIL = env(
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200'  # Replace with your Elasticsearch server details
+        'hosts': 'es:9200',
     },
 }

@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/', include('core_apps.users.urls', namespace='users')),
     path('api/', include('core_apps.profiles.urls', namespace='profiles')),
     path('', include('core_apps.jobapp.urls', namespace="job_app")),
+    path("api/", include("core_apps.search.urls", namespace="searchs")),
 
     path('docs(<format>\.json|\.yaml)/', schema_view.without_ui(
         cache_timeout=0), name='schema-json'),
