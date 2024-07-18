@@ -34,10 +34,5 @@ class JobPostDocument(Document):
     def prepare_skills(self, instance):
         return [skill.name for skill in instance.skills.all()]
 
-    @classmethod
-    def search(cls, **kwargs):
-        # Implement search functionality here
-        pass
-
     class Meta:
         model = JobPost
